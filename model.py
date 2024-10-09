@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping
 
 # Function to build the model
-def build_model(num_classes=2, dropout_rate=0.2):
+def build_model(num_classes=2, dropout_rate=0.5):
     """
     Builds a convolutional neural network model for image classification.
 
@@ -23,7 +23,7 @@ def build_model(num_classes=2, dropout_rate=0.2):
         tf.keras.layers.Dense(64, activation='relu'),
         tf.keras.layers.Dropout(dropout_rate),
         tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dense(num_classes, activation='softmax')  # Output layer for multi-class classification
+        tf.keras.layers.Dense(1, activation='sigmoid')  # Output layer for multi-class classification
     ])
     
     # Compile the model

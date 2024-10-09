@@ -31,7 +31,7 @@ def create_dataset(files_path, batch_size=32, target_size=(256, 256)):
         batch_size=batch_size,
         target_size=target_size,
         shuffle=True,
-        class_mode='categorical'  # Set to categorical for multi-class classification
+        class_mode='binary'  # Set to categorical for multi-class classification
     )
 
     valid_dataset = datagen.flow_from_directory(
@@ -41,7 +41,7 @@ def create_dataset(files_path, batch_size=32, target_size=(256, 256)):
         batch_size=batch_size,
         target_size=target_size,
         shuffle=True,
-        class_mode='categorical'  # Set to categorical for multi-class classification
+        class_mode='binary'  # Set to categorical for multi-class classification
     )
 
     return train_dataset, valid_dataset
