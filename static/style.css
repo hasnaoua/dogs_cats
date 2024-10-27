@@ -1,0 +1,97 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    font-family: "Open Sans", sans-serif;
+    background-color: #f1f1f1;
+}
+
+/* Centered container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Title Style */
+h1 {
+    color: #d64f4f;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Form Style */
+.form {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border: 2px solid #4a90e2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* File Input Style */
+.input {
+    font-size: 1.6rem;
+    padding: 1rem;
+    color: #333;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+/* File Input Hover and Focus */
+.input:hover,
+.input:focus {
+    border-color: #4a90e2;
+    background-color: #e6f7ff;
+}
+
+/* Button Style */
+.button {
+    font-size: 2rem;
+    color: white;
+    background-color: #d682ee;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover */
+.button:hover {
+    background-color: #c260e6;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .form {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .input,
+    .button {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>Model Interface</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to My Web Page</h1>
+      <form action="image/" method="POST" enctype="multipart/form-data" class="form">
+        <input type="file" name="file" accept="image/*" class="input" aria-label="Choose a file to upload" />
+        <button type="submit" class="button">Upload</button>
+      </form>
+    </div>
+  </body>
+</html>
