@@ -1,5 +1,21 @@
 import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping
+import logging
+import os
+
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+
+# Create early stopping callbacks
+early_stopping = EarlyStopping(
+    monitor='val_loss',
+    min_delta=0.05,
+    patience=10,
+    restore_best_weights=True
+)
+
 
 # Function to build the model
 def build_model(num_classes=2, dropout_rate=0.5):
@@ -31,10 +47,46 @@ def build_model(num_classes=2, dropout_rate=0.5):
 
     return model
 
-# Create early stopping callbacks
-early_stopping = EarlyStopping(
-    monitor='val_loss',
-    min_delta=0.05,
-    patience=10,
-    restore_best_weights=True
-)
+def save_model(model: tf.keras.Model, file_path: str, overwrite: bool = True, include_optimizer: bool = True) -> None:
+    """
+    Saves a TensorFlow Keras model to the specified file path.
+
+    Parameters:
+    - model (tf.keras.Model): The model to save.
+    - file_path (str): Path where the model will be saved. Should end with .keras or .h5 for compatibility.
+    - overwrite (bool, optional): Whether to overwrite any existing model at the target location. Defaults to True.
+    - include_optimizer (bool, optional): Whether to include the optimizer state in the saved model. Defaults to True.
+
+    Returns:
+    - None
+
+    Raises:
+    - ValueError: If the provided model is not a valid Keras model.
+    - ValueError: If the file_path does not have a compatible extension (.keras or .h5).
+    """
+    # Verify if the model is a valid Keras model
+    if not isinstance(model, tf.keras.Model):
+        raise ValueError("The provided model is not a valid Keras model.")
+    
+    # Ensure the file path has a compatible extension
+    if not (file_path.endswith('.keras') or file_path.endswith('.h5')):
+        raise ValueError("Invalid filepath extension for saving. Use either a `.keras` extension (recommended) or a `.h5` extension.")
+    
+    # Create the directory if it doesn't exist
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
+        logging.info(f"Created directory for model saving at: {directory}")
+
+    try:
+        # Save the model
+        tf.keras.models.save_model(
+            model,
+            filepath=os.path.abspath(file_path),
+            overwrite=overwrite,
+            include_optimizer=include_optimizer
+        )
+        logging.info(f"Model saved successfully to {os.path.abspath(file_path)}")
+
+    except Exception as e:
+        logging.error(f"Error saving model: {e}")

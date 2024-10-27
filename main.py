@@ -1,5 +1,5 @@
 import tensorflow as tf
-from model import build_model, early_stopping
+from model import build_model, save_model, early_stopping
 from preprocess import create_dataset
 import os
 import zipfile
@@ -59,6 +59,9 @@ def main(epochs=100, batch_size=32):
         callbacks=[early_stopping],
         verbose=1
     )
+
+    # save model
+    save_model(classifier, "check_points/model.keras")
 
 
 if __name__ == "__main__":
