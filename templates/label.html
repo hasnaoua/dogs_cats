@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}" />
+    <title>Result</title>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Uploaded Image">
+        <p>
+            Predicted Animal : {{ label }}
+        </p>    
+    </div>
+</body>
+</html>
