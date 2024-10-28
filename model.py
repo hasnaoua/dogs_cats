@@ -90,3 +90,40 @@ def save_model(model: tf.keras.Model, file_path: str, overwrite: bool = True, in
 
     except Exception as e:
         logging.error(f"Error saving model: {e}")
+
+
+def load_model(file_path: str):
+    """
+    Loads a TensorFlow Keras model from the specified file path.
+
+    Parameters:
+    - file_path (str): The path from which the model will be loaded. Should end with .keras or .h5 for compatibility.
+
+    Returns:
+    - tf.keras.Model: The loaded Keras model.
+
+    Raises:
+    - ValueError: If the file_path does not have a compatible extension (.keras or .h5).
+    - IOError: If the model file cannot be found or opened.
+    """
+    # Ensure the file path has a compatible extension
+    if not (file_path.endswith('.keras') or file_path.endswith('.h5')):
+        raise ValueError("Invalid filepath extension for loading. Use either a `.keras` extension (recommended) or a `.h5` extension.")
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        raise IOError(f"Model file not found at: {os.path.abspath(file_path)}")
+
+    try:
+        # Load the model
+        model = tf.keras.models.load_model(
+            os.path.abspath(file_path),
+            compile=True          # Compiles the model if set to True
+        )
+        logging.info(f"Model loaded successfully from {os.path.abspath(file_path)}")
+        return model
+
+    except Exception as e:
+        logging.error(f"Error loading model: {e}")
+        raise  # Re-raise the exception after logging
+    
